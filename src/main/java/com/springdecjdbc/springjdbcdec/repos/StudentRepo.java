@@ -15,6 +15,8 @@ public interface StudentRepo {
 
     String saveData(Student stu);
 
+    String saveData1(Student stu);
+
     String updateStudent(Integer id,String name);
 
     String deleteStudent(Integer id);

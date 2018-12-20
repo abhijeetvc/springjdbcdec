@@ -1,7 +1,10 @@
 package com.springdecjdbc.springjdbcdec.controller;
 
+import com.springdecjdbc.springjdbcdec.dao.DepartmentDao;
 import com.springdecjdbc.springjdbcdec.dao.StudentDao;
+import com.springdecjdbc.springjdbcdec.model.Department;
 import com.springdecjdbc.springjdbcdec.model.Student;
+import com.springdecjdbc.springjdbcdec.repos.DepartmentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +19,9 @@ public class StudentController {
 
     @Autowired
     private StudentDao studentDao;
+
+    @Autowired
+    private DepartmentDao departmentDao;
 
     @GetMapping(value="/getdata")
     public List<Student> getData(){
@@ -32,6 +38,7 @@ public class StudentController {
 
     @PostMapping(value="/save")
     public String saveStuData(@RequestBody Student student){
+
         return studentDao.saveData(student);
 
     }
@@ -47,5 +54,16 @@ public class StudentController {
         String str=studentDao.deleteStudent(id);
         return str;
     }
+
+    @PostMapping(value="/savedeptstu")
+    public String saveStuDeptAndStu(@RequestBody Student student){
+
+        Department d=student.getDepartment();
+        //departmentDao.saveDept(d);
+        studentDao.saveData(student);
+        return studentDao.saveData(student);
+    }
+
+
 
 }
